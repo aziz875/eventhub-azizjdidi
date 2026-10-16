@@ -1,0 +1,38 @@
+﻿<section class="event-list-section">
+  <div class="section-header">
+    <h1 class="section-title">Nos Événements</h1>
+    <p class="section-subtitle">
+      Découvrez nos activités et sélectionnez vos favoris
+      <span class="fav-badge">❤️ {{ favoritesCount() }}</span>
+    </p>
+  </div>
+
+  <!-- Filtre par catégorie -->
+  <div class="filter-bar">
+    @for (cat of categories; track cat) {
+      <button
+        class="filter-btn"
+        [class.active]="selectedCategory() === cat"
+        (click)="selectCategory(cat)"
+      >
+        {{ cat }}
+      </button>
+    }
+  </div>
+
+  <!-- Grille d'événements -->
+  <div class="events-grid">
+    @for (event of filteredEvents(); track event.id) {
+      <app-event-card
+        [event]="event"
+        [isFavorite]="isFavorite(event.id)"
+        (toggleFavorite)="onToggleFavorite($event)"
+      />
+    } @empty {
+      <div class="empty-state">
+        <span class="empty-icon">📍</span>
+        <p>Aucun événement disponible dans cette catégorie.</p>
+      </div>
+    }
+  </div>
+</section>
