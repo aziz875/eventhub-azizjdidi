@@ -1,0 +1,52 @@
+﻿@if (event(); as ev) {
+  <article class="details">
+    <div class="details-hero">
+      <img [src]="ev.imageUrl" [alt]="ev.title" class="details-image" />
+      <div class="details-hero-overlay"></div>
+      <div class="details-hero-content">
+        <span class="details-category">{{ ev.category | uppercase }}</span>
+        <h1 class="details-title">{{ ev.title }}</h1>
+      </div>
+    </div>
+
+    <div class="details-body">
+      <div class="details-info-grid">
+        <div class="info-card">
+          <span class="info-icon">📅</span>
+          <span class="info-label">Date</span>
+          <span class="info-value">{{ ev.date | date:'fullDate':'':'fr-FR' }}</span>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">📍</span>
+          <span class="info-label">Lieu</span>
+          <span class="info-value">{{ ev.place }}</span>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">💰</span>
+          <span class="info-label">Prix</span>
+          <span class="info-value" [class.free]="ev.price === 0">
+            @if (ev.price === 0) {
+              Gratuit
+            } @else {
+              {{ ev.price | currency:'TND':'symbol':'1.0-3':'fr-FR' }}
+            }
+          </span>
+        </div>
+      </div>
+
+      <div class="details-description">
+        <h2>Description</h2>
+        <p>{{ ev.description }}</p>
+      </div>
+
+      <button class="back-btn" (click)="goBack()">← Retour aux Événements</button>
+    </div>
+  </article>
+} @else {
+  <div class="not-found-detail">
+    <span class="nf-icon">🔍</span>
+    <h2>Événement introuvable</h2>
+    <p>L'identifiant demandé ne correspond à aucun événement.</p>
+    <button class="back-btn" (click)="goBack()">← Retour aux Événements</button>
+  </div>
+}

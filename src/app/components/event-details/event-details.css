@@ -1,0 +1,166 @@
+.details {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+.details-hero {
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+}
+
+.details-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 15, 30, 0.95) 0%, transparent 60%);
+}
+
+.details-hero-content {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+}
+
+.details-category {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.85);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.details-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.details-body {
+  padding: 2rem 1.5rem;
+}
+
+.details-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: center;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.info-value.free {
+  color: #34d399;
+}
+
+.details-description {
+  margin-bottom: 2rem;
+}
+
+.details-description h2 {
+  font-size: 1.25rem;
+  color: #fff;
+  margin: 0 0 0.75rem;
+}
+
+.details-description p {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* ── Not found fallback ── */
+.not-found-detail {
+  text-align: center;
+  padding: 6rem 2rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.not-found-detail .nf-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.not-found-detail h2 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0 0 0.5rem;
+}
+
+.not-found-detail p {
+  margin: 0 0 2rem;
+}
+
+@media (max-width: 700px) {
+  .details-hero {
+    height: 240px;
+  }
+  .details-title {
+    font-size: 1.4rem;
+  }
+  .details-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
