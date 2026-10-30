@@ -20,9 +20,18 @@ export class EventCard {
   /** Émet quand l'utilisateur clique sur le bouton favoris */
   toggleFavorite = output<number>();
 
+  /** Émet quand l'utilisateur clique sur le bouton supprimer */
+  deleteEvent = output<number>();
+
   onToggleFavorite(event: Event): void {
     event.preventDefault();
     event.stopPropagation();
     this.toggleFavorite.emit(this.event().id);
+  }
+
+  onDelete(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.deleteEvent.emit(this.event().id);
   }
 }

@@ -27,16 +27,38 @@
   gap: 0.75rem;
 }
 
-.fav-badge {
+/* ── Counters ── */
+.counters {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.counter-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.counter-badge.total {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}
+
+.counter-badge.fav {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.counter-badge.free {
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
 }
 
 /* ── Filter bar ── */

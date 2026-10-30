@@ -1,7 +1,6 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { EventCard } from '../event-card/event-card';
-import { EventItem } from '../../models/event.model';
-import { EVENTS } from '../../data/events.data';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-event-list',
@@ -11,14 +10,15 @@ import { EVENTS } from '../../data/events.data';
   styleUrl: './event-list.css'
 })
 export class EventList {
-  /** Liste complète des événements */
-  readonly events = signal<EventItem[]>(EVENTS);
+  private eventService = inject(EventService);
 
-  /** IDs des événements en favoris */
-  readonly favoriteIds = signal<Set<number>>(new Set());
+  /** Événements depuis le service */
+  readonly events = this.eventService.events;
 
-  /** Nombre de favoris (computed) */
-  readonly favoritesCount = computed(() => this.favoriteIds().size);
+  /** Compteurs computed depuis le service */
+  readonly eventCount = this.eventService.eventCount;
+  readonly favoriteCount = this.eventService.favoriteCount;
+  readonly freeEventCount = this.eventService.freeEventCount;
 
   /** Catégorie sélectionnée pour le filtre */
   readonly selectedCategory = signal<string>('Tous');
@@ -28,6 +28,7 @@ export class EventList {
     'Tous',
     'Atelier',
     'Conférence',
+    'Sport',
     'Rencontre',
     'Compétition'
   ];
@@ -48,19 +49,18 @@ export class EventList {
 
   /** Ajouter / retirer un favori */
   onToggleFavorite(eventId: number): void {
-    this.favoriteIds.update(ids => {
-      const copy = new Set(ids);
-      if (copy.has(eventId)) {
-        copy.delete(eventId);
-      } else {
-        copy.add(eventId);
-      }
-      return copy;
-    });
+    this.eventService.toggleFavorite(eventId);
   }
 
   /** Vérifie si un événement est en favori */
   isFavorite(eventId: number): boolean {
-    return this.favoriteIds().has(eventId);
+    return this.eventService.isFavorite(eventId);
+  }
+
+  /** Supprimer un événement */
+  onDeleteEvent(eventId: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
+      this.eventService.deleteEvent(eventId);
+    }
   }
 }

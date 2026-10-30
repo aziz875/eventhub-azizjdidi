@@ -1,10 +1,15 @@
-﻿<section class="event-list-section">
+<section class="event-list-section">
   <div class="section-header">
     <h1 class="section-title">Nos Événements</h1>
     <p class="section-subtitle">
       Découvrez nos activités et sélectionnez vos favoris
-      <span class="fav-badge">❤️ {{ favoritesCount() }}</span>
     </p>
+    <!-- Compteurs -->
+    <div class="counters">
+      <span class="counter-badge total">📋 Total : {{ eventCount() }}</span>
+      <span class="counter-badge fav">❤️ Favoris : {{ favoriteCount() }}</span>
+      <span class="counter-badge free">🆓 Gratuits : {{ freeEventCount() }}</span>
+    </div>
   </div>
 
   <!-- Filtre par catégorie -->
@@ -27,6 +32,7 @@
         [event]="event"
         [isFavorite]="isFavorite(event.id)"
         (toggleFavorite)="onToggleFavorite($event)"
+        (deleteEvent)="onDeleteEvent($event)"
       />
     } @empty {
       <div class="empty-state">

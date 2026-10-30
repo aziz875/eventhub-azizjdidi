@@ -1,4 +1,4 @@
-﻿<article class="card">
+<article class="card">
   <div class="card-image-wrap">
     <img [src]="event().imageUrl" [alt]="event().title" class="card-image" />
     <span class="card-category">{{ event().category | uppercase }}</span>
@@ -29,9 +29,14 @@
           {{ event().price | currency:'TND':'symbol':'1.0-3':'fr-FR' }}
         }
       </span>
-      <a [routerLink]="['/events', event().id]" class="card-link">
-        Voir les détails →
-      </a>
+      <div class="card-actions">
+        <a [routerLink]="['/events', event().id]" class="card-link">
+          Voir les détails →
+        </a>
+        <button class="card-delete-btn" (click)="onDelete($event)" aria-label="Supprimer">
+          🗑️
+        </button>
+      </div>
     </div>
   </div>
 </article>
