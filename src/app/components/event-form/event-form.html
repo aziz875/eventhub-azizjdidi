@@ -1,0 +1,118 @@
+<section class="form-section">
+  <h1 class="form-title">Ajouter un Événement</h1>
+  <p class="form-subtitle">Remplissez le formulaire pour créer un nouvel événement</p>
+
+  <form [formGroup]="eventForm" (ngSubmit)="addEvent()" class="event-form" novalidate>
+
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title" class="form-label">Titre</label>
+      <input id="title" type="text" formControlName="title" class="form-input"
+             placeholder="Ex : Atelier Angular" />
+      @if (eventForm.get('title')?.invalid && eventForm.get('title')?.touched) {
+        <div class="form-error">
+          @if (eventForm.get('title')?.hasError('required')) {
+            Le titre est obligatoire.
+          } @else if (eventForm.get('title')?.hasError('minlength')) {
+            Le titre doit contenir au moins 5 caractères.
+          } @else if (eventForm.get('title')?.hasError('maxlength')) {
+            Le titre ne doit pas dépasser 50 caractères.
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Category -->
+    <div class="form-group">
+      <label for="category" class="form-label">Catégorie</label>
+      <select id="category" formControlName="category" class="form-input">
+        <option value="" disabled>— Choisir une catégorie —</option>
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+      @if (eventForm.get('category')?.invalid && eventForm.get('category')?.touched) {
+        <div class="form-error">La catégorie est obligatoire.</div>
+      }
+    </div>
+
+    <!-- Date -->
+    <div class="form-group">
+      <label for="date" class="form-label">Date</label>
+      <input id="date" type="date" formControlName="date" class="form-input" />
+      @if (eventForm.get('date')?.invalid && eventForm.get('date')?.touched) {
+        <div class="form-error">La date est obligatoire.</div>
+      }
+    </div>
+
+    <!-- Place -->
+    <div class="form-group">
+      <label for="place" class="form-label">Lieu</label>
+      <input id="place" type="text" formControlName="place" class="form-input"
+             placeholder="Ex : Campus — Salle B12" />
+      @if (eventForm.get('place')?.invalid && eventForm.get('place')?.touched) {
+        <div class="form-error">
+          @if (eventForm.get('place')?.hasError('required')) {
+            Le lieu est obligatoire.
+          } @else if (eventForm.get('place')?.hasError('minlength')) {
+            Le lieu doit contenir au moins 3 caractères.
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price" class="form-label">Prix (TND)</label>
+      <input id="price" type="number" formControlName="price" class="form-input"
+             placeholder="0" min="0" />
+      @if (eventForm.get('price')?.invalid && eventForm.get('price')?.touched) {
+        <div class="form-error">
+          @if (eventForm.get('price')?.hasError('required')) {
+            Le prix est obligatoire.
+          } @else if (eventForm.get('price')?.hasError('min')) {
+            Le prix doit être supérieur ou égal à 0.
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Image URL -->
+    <div class="form-group">
+      <label for="imageUrl" class="form-label">URL de l'image <span class="optional">(facultatif)</span></label>
+      <input id="imageUrl" type="text" formControlName="imageUrl" class="form-input"
+             placeholder="Ex : https://example.com/image.jpg" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-input form-textarea"
+                placeholder="Décrivez l'événement en détail (min. 20 caractères)..." rows="4"></textarea>
+      @if (eventForm.get('description')?.invalid && eventForm.get('description')?.touched) {
+        <div class="form-error">
+          @if (eventForm.get('description')?.hasError('required')) {
+            La description est obligatoire.
+          } @else if (eventForm.get('description')?.hasError('minlength')) {
+            La description doit contenir au moins 20 caractères.
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="submit-btn" [disabled]="eventForm.invalid">
+      ✨ Créer l'événement
+    </button>
+  </form>
+
+  <!-- Debug : valeurs et statut en temps réel -->
+  <div class="form-debug">
+    <h3>🔍 Aperçu en direct</h3>
+    <div class="debug-status" [class.valid]="formStatus() === 'VALID'" [class.invalid]="formStatus() !== 'VALID'">
+      Statut : {{ formStatus() }}
+    </div>
+    <pre class="debug-json">{{ formValue() | json }}</pre>
+  </div>
+</section>
+
